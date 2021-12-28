@@ -1,0 +1,19 @@
+{
+  "name": "iotcommander-server-javascript",
+  "version": "0.1.0",
+  "description": "Javascript implementation for IOTCommander server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klitos-giannak/IOTCommander-server-javascript.git"
+  },
+  "author": "Klitos Giannakopoulos",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/klitos-giannak/IOTCommander-server-javascript/issues"
+  },
+  "homepage": "https://github.com/klitos-giannak/IOTCommander-server-javascript#readme"
+}
