@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/klitos-giannak/IOTCommander-server-javascript/issues"
   },
-  "homepage": "https://github.com/klitos-giannak/IOTCommander-server-javascript#readme"
+  "homepage": "https://github.com/klitos-giannak/IOTCommander-server-javascript#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
 }
