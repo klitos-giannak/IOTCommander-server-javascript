@@ -1,4 +1,4 @@
-  {
+{
   "name": "iotcommander-server-javascript",
   "version": "0.1.0",
   "description": "Javascript implementation for IOTCommander server",
@@ -19,5 +19,8 @@
   "homepage": "https://github.com/klitos-giannak/IOTCommander-server-javascript#readme",
   "dependencies": {
     "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13"
   }
 }
