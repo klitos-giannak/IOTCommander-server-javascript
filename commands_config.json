@@ -1,0 +1,28 @@
+{
+  "testString": {
+    "myText": "text",
+    "shellCommand": "echo command testString, params: $myText"
+  },
+  "testInt": {
+    "myInt": "int",
+    "shellCommand": "echo command testInt, params: $myInt"
+  },
+  "testFloat": {
+    "myFloat": "float",
+    "shellCommand": "echo command testFloat, params: $myFloat"
+  },
+  "testBoolean": {
+    "myBoolean": "boolean",
+    "shellCommand": "echo command testBoolean, params: $myBoolean"
+  },
+  "testNoParams": {
+    "shellCommand": "echo command testNoParams"
+  },
+  "testAllTypes": {
+    "myInt": "int",
+    "myFloat": "float",
+    "myText": "text",
+    "myBoolean": "boolean",
+    "shellCommand": "echo command testAllTypes, params: $myText, $myFloat, $myInt, $myBoolean"
+  }
+}
