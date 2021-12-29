@@ -15,12 +15,12 @@ const ACCEPTED_PARAMETER_TYPES = [PARAM_INTEGER, PARAM_FLOAT, PARAM_BOOLEAN, PAR
 let supported_commands = {}
 
 function validateConfig() {
-    let file = fs.readFileSync('commands_config.json');
-    let json = JSON.parse(file)
+    const file = fs.readFileSync('commands_config.json');
+    const json = JSON.parse(file)
 
     for (const [command, parameters] of Object.entries(json)) {
         
-        let shellCommand = parameters.shellCommand
+        const shellCommand = parameters.shellCommand
         if (shellCommand == null) {
             console.log('"' + PARAM_SHELL_COMMAND + '" not found for command "' + command + '"')
             return false
@@ -46,11 +46,11 @@ console.log("Supported commands: " + Object.keys(supported_commands))
 
 
 //Setup and run the commands service
-const app = express();
+const app = express()
 
 app.get('/', (req, res) => {        
-    res.sendFile('index.html', {root: __dirname});
-});
+    res.sendFile('index.html', {root: __dirname})
+})
 
 app.get('/commands', (req, res) =>  {
     console.log("Supported commands requested. Sending Back Commands config.")
@@ -64,4 +64,4 @@ app.get('/commands', (req, res) =>  {
 
 app.listen(port, () => {
     console.log(`-- Running commands server at port ${port} --\n\n`); 
-});
+})
