@@ -49,9 +49,19 @@ console.log("Supported commands: " + Object.keys(supported_commands))
 const app = express();
 
 app.get('/', (req, res) => {        
-    res.sendFile('index.html', {root: __dirname});       
+    res.sendFile('index.html', {root: __dirname});
 });
 
+app.get('/commands', (req, res) =>  {
+    console.log("Supported commands requested. Sending Back Commands config.")
+
+    let clone = JSON.parse(JSON.stringify(supported_commands))
+    for (const [command, parameters] of Object.entries(clone)) {
+        delete parameters.shellCommand
+    }
+    res.send(JSON.stringify(clone, null, 2) + "\n")
+})
+
 app.listen(port, () => {
-    console.log(`-- Running commands server at port ${port} --`); 
+    console.log(`-- Running commands server at port ${port} --\n\n`); 
 });
