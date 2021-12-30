@@ -1,5 +1,5 @@
 import express from 'express';
-import fs from 'fs'
+import { readFileSync } from 'fs'
 
 const port = 9977;
 
@@ -15,7 +15,7 @@ const ACCEPTED_PARAMETER_TYPES = [PARAM_INTEGER, PARAM_FLOAT, PARAM_BOOLEAN, PAR
 let supported_commands = {}
 
 function validateConfig() {
-    const file = fs.readFileSync('commands_config.json');
+    const file = readFileSync('commands_config.json');
     const json = JSON.parse(file)
 
     for (const [command, parameters] of Object.entries(json)) {
