@@ -5,7 +5,7 @@ import { exec } from 'child_process'
 import dgram from 'dgram'
 import { hostname } from 'os';
 
-const port = 9977;
+const PORT = 9977;
 
 const __dirname = new URL('.', import.meta.url).pathname;
 
@@ -19,7 +19,6 @@ const ACCEPTED_BOOLEAN_TRUE_VALUES = ["true", "t", "1"]
 const ACCEPTED_BOOLEAN_FALSE_VALUES = ["false", "f", "0"]
 const COMMAND_RESPONSE_BAD_REQUEST_BODY = "<html><body><h1>[400] Bad Request</h1>%s</body></html>\n"
 const COMMAND_RESPONSE_OK_BODY = "<html><body><h1>[200] OK</h1><p>Command successful</p></body></html>\n"
-
 
 let supported_commands = {}
 
@@ -131,7 +130,7 @@ app.get('/command/:commandName', (req, res) => {
         }
     }
 
-    console.log("Parameters parsed successfully, responding OK\n")
+    console.log("Parameters parsed successfully, responding OK")
 
     executeShellCommand(shellCommand);
     res.send(COMMAND_RESPONSE_OK_BODY)
@@ -168,14 +167,14 @@ app.get('/command/:commandName', (req, res) => {
     }
 })
 
-app.listen(port, () => {
-    console.log(`-- Running commands server at port ${port} --\n\n`); 
+app.listen(PORT, () => {
+    console.log(`\n-- Running commands server at port ${PORT} --`); 
 })
 
 //Broadcast discover service
 
 var server = dgram.createSocket("udp4");
-server.bind(port);
+server.bind(PORT);
 
 // When udp server receive message.
 server.on("message", function (message, remoteInfo) {
@@ -186,14 +185,14 @@ server.on("message", function (message, remoteInfo) {
         const outgoingMessage = JSON.stringify(createResponseObject())
 
         server.send(outgoingMessage, remoteInfo.port, remoteInfo.address, null);
-        console.log("Out -> " + remoteInfo.address + ":" + remoteInfo.port + " : " + outgoingMessage)
+        console.log("Out -> " + remoteInfo.address + ":" + remoteInfo.port + " : " + outgoingMessage + "\n")
     }
 });
 
 // When udp server started and listening.
 server.on('listening', function () {
     var address = server.address(); 
-    console.log("\n\nBroadcast Server started: listening to port " + address.port + "\n")
+    console.log("\nBroadcast Server started: listening to port " + address.port + "\n\n")
 });
 
 function createResponseObject() {
