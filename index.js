@@ -2,6 +2,8 @@ import express from 'express';
 import { readFileSync } from 'fs'
 import { format } from 'util'
 import { exec } from 'child_process'
+import dgram from 'dgram'
+import { hostname } from 'os';
 
 const port = 9977;
 
@@ -169,3 +171,33 @@ app.get('/command/:commandName', (req, res) => {
 app.listen(port, () => {
     console.log(`-- Running commands server at port ${port} --\n\n`); 
 })
+
+//Broadcast discover service
+
+var server = dgram.createSocket("udp4");
+server.bind(port);
+
+// When udp server receive message.
+server.on("message", function (message, remoteInfo) {
+    console.log("In <-" + remoteInfo.address + ":" + remoteInfo.port + " : " + message)
+    const incomingJson = JSON.parse(message)
+    if (incomingJson.hasOwnProperty("action") && incomingJson["action"] === "discover") {
+        console.log('action "discover" found. Responding...')
+        const outgoingMessage = JSON.stringify(createResponseObject())
+
+        server.send(outgoingMessage, remoteInfo.port, remoteInfo.address, null);
+        console.log("Out -> " + remoteInfo.address + ":" + remoteInfo.port + " : " + outgoingMessage)
+    }
+});
+
+// When udp server started and listening.
+server.on('listening', function () {
+    var address = server.address(); 
+    console.log("\n\nBroadcast Server started: listening to port " + address.port + "\n")
+});
+
+function createResponseObject() {
+    let obj = new Object()
+    obj.deviceName = hostname()
+    return obj
+}
